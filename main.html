@@ -62,9 +62,64 @@
             position: relative;
         }
 
+        .crown.gold::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: #ffed4e;
+            border-radius: 2px;
+        }
+
+        .crown.gold::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
         .crown.silver {
             background: linear-gradient(45deg, #c0c0c0, #e5e5e5);
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+        }
+
+        .crown.silver::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 6px;
+            background: #e5e5e5;
+            border-radius: 2px;
+        }
+
+        .crown.bronze {
+            background: linear-gradient(45deg, #cd7f32, #d2a055);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+        }
+
+        .crown.bronze::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 6px;
+            background: #d2a055;
+            border-radius: 2px;
         }
 
         .rank-text {
@@ -101,6 +156,86 @@
             border: 2px solid #fff;
             font-size: 12px;
             color: white;
+        }
+
+        .status-badge.live {
+            background: linear-gradient(45deg, #ff4757, #ff3838);
+            animation: pulse 2s infinite;
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .first-place {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 255, 255, 0.95));
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            transform: scale(1.05);
+            box-shadow: 0 8px 40px rgba(255, 215, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .first-place::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+            animation: shimmer 3s infinite;
+        }
+
+        .first-place:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 12px 50px rgba(255, 215, 0, 0.4), 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .second-place {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.15), rgba(255, 255, 255, 0.92));
+            border: 2px solid rgba(192, 192, 192, 0.5);
+            transform: scale(1.03);
+            box-shadow: 0 6px 30px rgba(192, 192, 192, 0.2), 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .second-place:hover {
+            transform: scale(1.03) translateY(-3px);
+            box-shadow: 0 10px 40px rgba(192, 192, 192, 0.3), 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .third-place {
+            background: linear-gradient(135deg, rgba(205, 127, 50, 0.12), rgba(255, 255, 255, 0.9));
+            border: 2px solid rgba(205, 127, 50, 0.4);
+            transform: scale(1.01);
+            box-shadow: 0 4px 25px rgba(205, 127, 50, 0.15), 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .third-place:hover {
+            transform: scale(1.01) translateY(-2px);
+            box-shadow: 0 8px 35px rgba(205, 127, 50, 0.25), 0 6px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
         }
 
         .user-info {
@@ -278,14 +413,48 @@
 
 <body>
     <div class="ranking-container">
+        <!-- 1位 -->
+        <div class="ranking-item first-place">
+            <div class="rank-number">
+                <div class="crown gold"></div>
+                <span class="rank-text">1位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+                    alt="1位ユーザー" class="avatar">
+                <div class="status-badge live">LIVE</div>
+            </div>
+            <div class="user-info">
+                <div class="username">
+                    <span class="verified">♡</span>みかん姫<span class="verified">♡</span>✨👑
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-icon followers-icon"></div>
+                        <span>45,832</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon points-icon"></div>
+                        <span>25,678,920</span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="actions">
+                <button class="follow-btn">
+                    👤 フォローする
+                </button>
+                <button class="notification-btn">🔔</button>
+            </div> -->
+        </div>
+
         <!-- 2位 -->
-        <div class="ranking-item">
+        <div class="ranking-item second-place">
             <div class="rank-number">
                 <div class="crown silver"></div>
                 <span class="rank-text">2位</span>
             </div>
             <div class="avatar-container">
-                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b5bb?w=150&h=150&fit=crop&crop=face"
+                <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face"
                     alt="ぺろチャラ" class="avatar">
                 <div class="status-badge">♡</div>
             </div>
@@ -304,18 +473,18 @@
                     </div>
                 </div>
             </div>
-            <div class="actions">
+            <!-- <div class="actions">
                 <button class="follow-btn">
                     👤 フォローする
                 </button>
                 <button class="notification-btn">🔔</button>
-            </div>
+            </div> -->
         </div>
 
         <!-- 3位 -->
-        <div class="ranking-item">
+        <div class="ranking-item third-place">
             <div class="rank-number">
-                <div class="crown"></div>
+                <div class="crown bronze"></div>
                 <span class="rank-text">3位</span>
             </div>
             <div class="avatar-container">
@@ -338,12 +507,12 @@
                     </div>
                 </div>
             </div>
-            <div class="actions">
+            <!-- <div class="actions">
                 <button class="follow-btn">
                     👤 フォローする
                 </button>
                 <button class="notification-btn">🔔</button>
-            </div>
+            </div> -->
         </div>
 
         <!-- 4位 -->
@@ -371,12 +540,12 @@
                     </div>
                 </div>
             </div>
-            <div class="actions">
+            <!-- <div class="actions">
                 <button class="follow-btn">
                     👤 フォローする
                 </button>
                 <button class="notification-btn">🔔</button>
-            </div>
+            </div> -->
         </div>
 
         <!-- 5位 -->
@@ -403,12 +572,12 @@
                     </div>
                 </div>
             </div>
-            <div class="actions">
+            <!-- <div class="actions">
                 <button class="follow-btn">
                     👤 フォローする
                 </button>
                 <button class="notification-btn">🔔</button>
-            </div>
+            </div> -->
         </div>
 
         <!-- 6位 -->
@@ -435,12 +604,12 @@
                     </div>
                 </div>
             </div>
-            <div class="actions">
+            <!-- <div class="actions">
                 <button class="follow-btn">
                     👤 フォローする
                 </button>
                 <button class="notification-btn">🔔</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
