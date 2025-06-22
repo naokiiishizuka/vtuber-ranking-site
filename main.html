@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ライブ配信ランキング</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .ranking-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ranking-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin-bottom: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ranking-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .rank-number {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+            min-width: 60px;
+        }
+
+        .crown {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 4px;
+        }
+
+        .crown.gold {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+        }
+
+        .crown.silver {
+            background: linear-gradient(45deg, #c0c0c0, #e5e5e5);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .rank-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .avatar-container {
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 24px;
+            height: 24px;
+            background: #ff69b4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+            font-size: 12px;
+            color: white;
+        }
+
+        .user-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .username {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .verified {
+            color: #9c27b0;
+            font-size: 16px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        .followers-icon {
+            background: #666;
+        }
+
+        .points-icon {
+            background: #ffd700;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .follow-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .follow-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .notification-btn {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: #666;
+            font-size: 18px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .notification-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .ranking-item {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .rank-number {
+                margin-right: 12px;
+                min-width: 40px;
+            }
+
+            .crown {
+                width: 24px;
+                height: 24px;
+            }
+
+            .rank-text {
+                font-size: 14px;
+            }
+
+            .avatar {
+                width: 60px;
+                height: 60px;
+            }
+
+            .avatar-container {
+                margin-right: 12px;
+            }
+
+            .status-badge {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
+
+            .username {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+
+            .stats {
+                gap: 12px;
+                font-size: 12px;
+                flex-wrap: wrap;
+            }
+
+            .actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .follow-btn {
+                padding: 6px 16px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .username {
+                font-size: 14px;
+            }
+
+            .ranking-item {
+                padding: 12px;
+            }
+        }
+
+        /* タブレット用（768px-1024px）でPCデザインを維持 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .ranking-container {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ranking-container">
+        <!-- 2位 -->
+        <div class="ranking-item">
+            <div class="rank-number">
+                <div class="crown silver"></div>
+                <span class="rank-text">2位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b5bb?w=150&h=150&fit=crop&crop=face"
+                    alt="ぺろチャラ" class="avatar">
+                <div class="status-badge">♡</div>
+            </div>
+            <div class="user-info">
+                <div class="username">
+                    <span class="verified">♡</span>ぺろチャラ<span class="verified">♡</span>🌊
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-icon followers-icon"></div>
+                        <span>22,346</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon points-icon"></div>
+                        <span>17,403,455</span>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="follow-btn">
+                    👤 フォローする
+                </button>
+                <button class="notification-btn">🔔</button>
+            </div>
+        </div>
+
+        <!-- 3位 -->
+        <div class="ranking-item">
+            <div class="rank-number">
+                <div class="crown"></div>
+                <span class="rank-text">3位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+                    alt="黒もち" class="avatar">
+                <div class="status-badge">👤</div>
+            </div>
+            <div class="user-info">
+                <div class="username">
+                    黒もち❤️🌸
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-icon followers-icon"></div>
+                        <span>16,541</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon points-icon"></div>
+                        <span>16,400,425</span>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="follow-btn">
+                    👤 フォローする
+                </button>
+                <button class="notification-btn">🔔</button>
+            </div>
+        </div>
+
+        <!-- 4位 -->
+        <div class="ranking-item">
+            <div class="rank-number">
+                <span class="rank-text">4位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                    alt="天然ストレート" class="avatar">
+                <div class="status-badge">👤</div>
+            </div>
+            <div class="user-info">
+                <div class="username">
+                    天然ストレート＠たかしゼミ
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-icon followers-icon"></div>
+                        <span>227,080</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon points-icon"></div>
+                        <span>12,895,855</span>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="follow-btn">
+                    👤 フォローする
+                </button>
+                <button class="notification-btn">🔔</button>
+            </div>
+        </div>
+
+        <!-- 5位 -->
+        <div class="ranking-item">
+            <div class="rank-number">
+                <span class="rank-text">5位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
+                    alt="Saa♡chan" class="avatar">
+            </div>
+            <div class="user-info">
+                <div class="username">
+                    Saa♡chan
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-icon followers-icon"></div>
+                        <span>66,472</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon points-icon"></div>
+                        <span>8,930,010</span>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="follow-btn">
+                    👤 フォローする
+                </button>
+                <button class="notification-btn">🔔</button>
+            </div>
+        </div>
+
+        <!-- 6位 -->
+        <div class="ranking-item">
+            <div class="rank-number">
+                <span class="rank-text">6位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+                    alt="ぱんだ院長" class="avatar">
+            </div>
+            <div class="user-info">
+                <div class="username">
+                    ぱんだ院長@23日バトル🥇花屋
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-icon followers-icon"></div>
+                        <span>26,021</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon points-icon"></div>
+                        <span>8,133,980</span>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="follow-btn">
+                    👤 フォローする
+                </button>
+                <button class="notification-btn">🔔</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
