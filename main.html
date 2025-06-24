@@ -241,6 +241,14 @@
         .user-info {
             flex: 1;
             min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-details {
+            flex: 1;
+            min-width: 0;
         }
 
         .username {
@@ -285,44 +293,50 @@
             background: #ffd700;
         }
 
-        .actions {
+        .sales-info {
             display: flex;
-            gap: 12px;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            min-width: 120px;
         }
 
-        .follow-btn {
-            background: #f0f0f0;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 20px;
-            font-size: 14px;
-            color: #666;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
+        .sales-label {
+            font-size: 12px;
+            color: #4caf50;
+            font-weight: bold;
+            margin-bottom: 2px;
         }
 
-        .follow-btn:hover {
-            background: #e0e0e0;
-            transform: translateY(-1px);
-        }
-
-        .notification-btn {
-            background: none;
-            border: none;
-            padding: 8px;
-            cursor: pointer;
-            color: #666;
+        .sales-amount {
             font-size: 18px;
-            border-radius: 50%;
-            transition: all 0.2s ease;
+            font-weight: bold;
+            color: #1b5e20;
         }
 
-        .notification-btn:hover {
-            background: #f0f0f0;
-            transform: scale(1.1);
+        /* モバイル用の順位スタイリング調整 */
+        .first-place {
+            transform: scale(1.02);
+        }
+
+        .first-place:hover {
+            transform: scale(1.02) translateY(-2px);
+        }
+
+        .second-place {
+            transform: scale(1.01);
+        }
+
+        .second-place:hover {
+            transform: scale(1.01) translateY(-2px);
+        }
+
+        .third-place {
+            transform: scale(1.005);
+        }
+
+        .third-place:hover {
+            transform: scale(1.005) translateY(-1px);
         }
 
         /* レスポンシブデザイン */
@@ -365,6 +379,10 @@
                 font-size: 10px;
             }
 
+            .user-info {
+                gap: 12px;
+            }
+
             .username {
                 font-size: 16px;
                 margin-bottom: 6px;
@@ -376,21 +394,40 @@
                 flex-wrap: wrap;
             }
 
-            .actions {
-                flex-direction: column;
-                gap: 8px;
+            .sales-info {
+                min-width: 100px;
             }
 
-            .follow-btn {
-                padding: 6px 16px;
-                font-size: 12px;
+            .sales-label {
+                font-size: 10px;
+            }
+
+            .sales-amount {
+                font-size: 14px;
             }
         }
 
         @media (max-width: 480px) {
+            .user-info {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .user-details {
+                width: 100%;
+            }
+
             .stats {
                 flex-direction: column;
                 gap: 6px;
+            }
+
+            .sales-info {
+                align-items: flex-start;
+                text-align: left;
+                min-width: auto;
+                width: 100%;
             }
 
             .username {
@@ -422,29 +459,29 @@
             <div class="avatar-container">
                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
                     alt="1位ユーザー" class="avatar">
-                <!-- <div class="status-badge live">LIVE</div> -->
+                <div class="status-badge live">LIVE</div>
             </div>
             <div class="user-info">
-                <div class="username">
-                    <span class="verified">♡</span>みかん姫<span class="verified">♡</span>✨👑
+                <div class="user-details">
+                    <div class="username">
+                        <span class="verified">♡</span>みかん姫<span class="verified">♡</span>✨👑
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>45,832</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>25,678,920</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-icon followers-icon"></div>
-                        <span>45,832</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon points-icon"></div>
-                        <span>25,678,920</span>
-                    </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥3,845,200</div>
                 </div>
             </div>
-            <!-- <div class="actions">
-                <button class="follow-btn">
-                    👤 フォローする
-                </button>
-                <button class="notification-btn">🔔</button>
-            </div> -->
         </div>
 
         <!-- 2位 -->
@@ -456,29 +493,29 @@
             <div class="avatar-container">
                 <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face"
                     alt="ぺろチャラ" class="avatar">
-                <!-- <div class="status-badge">♡</div> -->
+                <div class="status-badge">♡</div>
             </div>
             <div class="user-info">
-                <div class="username">
-                    <span class="verified">♡</span>ぺろチャラ<span class="verified">♡</span>🌊
+                <div class="user-details">
+                    <div class="username">
+                        <span class="verified">♡</span>ぺろチャラ<span class="verified">♡</span>🌊
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>22,346</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>17,403,455</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-icon followers-icon"></div>
-                        <span>22,346</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon points-icon"></div>
-                        <span>17,403,455</span>
-                    </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥2,610,500</div>
                 </div>
             </div>
-            <!-- <div class="actions">
-                <button class="follow-btn">
-                    👤 フォローする
-                </button>
-                <button class="notification-btn">🔔</button>
-            </div> -->
         </div>
 
         <!-- 3位 -->
@@ -490,29 +527,29 @@
             <div class="avatar-container">
                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
                     alt="黒もち" class="avatar">
-                <!-- <div class="status-badge">👤</div> -->
+                <div class="status-badge">👤</div>
             </div>
             <div class="user-info">
-                <div class="username">
-                    黒もち❤️🌸
+                <div class="user-details">
+                    <div class="username">
+                        黒もち❤️🌸
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>16,541</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>16,400,425</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-icon followers-icon"></div>
-                        <span>16,541</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon points-icon"></div>
-                        <span>16,400,425</span>
-                    </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥2,460,060</div>
                 </div>
             </div>
-            <!-- <div class="actions">
-                <button class="follow-btn">
-                    👤 フォローする
-                </button>
-                <button class="notification-btn">🔔</button>
-            </div> -->
         </div>
 
         <!-- 4位 -->
@@ -523,29 +560,29 @@
             <div class="avatar-container">
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
                     alt="天然ストレート" class="avatar">
-                <!-- <div class="status-badge">👤</div> -->
+                <div class="status-badge">👤</div>
             </div>
             <div class="user-info">
-                <div class="username">
-                    天然ストレート＠たかしゼミ
+                <div class="user-details">
+                    <div class="username">
+                        天然ストレート＠たかしゼミ
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>227,080</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>12,895,855</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-icon followers-icon"></div>
-                        <span>227,080</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon points-icon"></div>
-                        <span>12,895,855</span>
-                    </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥1,934,380</div>
                 </div>
             </div>
-            <!-- <div class="actions">
-                <button class="follow-btn">
-                    👤 フォローする
-                </button>
-                <button class="notification-btn">🔔</button>
-            </div> -->
         </div>
 
         <!-- 5位 -->
@@ -558,26 +595,26 @@
                     alt="Saa♡chan" class="avatar">
             </div>
             <div class="user-info">
-                <div class="username">
-                    Saa♡chan
+                <div class="user-details">
+                    <div class="username">
+                        Saa♡chan
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>66,472</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>8,930,010</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-icon followers-icon"></div>
-                        <span>66,472</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon points-icon"></div>
-                        <span>8,930,010</span>
-                    </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥1,339,500</div>
                 </div>
             </div>
-            <!-- <div class="actions">
-                <button class="follow-btn">
-                    👤 フォローする
-                </button>
-                <button class="notification-btn">🔔</button>
-            </div> -->
         </div>
 
         <!-- 6位 -->
@@ -590,26 +627,26 @@
                     alt="ぱんだ院長" class="avatar">
             </div>
             <div class="user-info">
-                <div class="username">
-                    ぱんだ院長@23日バトル🥇花屋
+                <div class="user-details">
+                    <div class="username">
+                        ぱんだ院長@23日バトル🥇花屋
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>26,021</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>8,133,980</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-icon followers-icon"></div>
-                        <span>26,021</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon points-icon"></div>
-                        <span>8,133,980</span>
-                    </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥1,220,100</div>
                 </div>
             </div>
-            <!-- <div class="actions">
-                <button class="follow-btn">
-                    👤 フォローする
-                </button>
-                <button class="notification-btn">🔔</button>
-            </div> -->
         </div>
     </div>
 </body>
