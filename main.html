@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -166,17 +165,9 @@
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .first-place {
@@ -229,13 +220,8 @@
         }
 
         @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .user-info {
@@ -592,6 +578,52 @@
             background: #667eea;
         }
 
+        /* ローディング */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .refresh-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .refresh-button:hover {
+            background: #5a6fd8;
+        }
+
         /* レスポンシブ - ヘッダー・フッター */
         @media (max-width: 768px) {
             .header-content {
@@ -619,7 +651,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- ヘッダー -->
     <header class="header">
@@ -627,7 +658,7 @@
             <div class="logo">
                 🎥 LiveRanking
             </div>
-            <!-- <nav>
+            <nav>
                 <ul class="nav-menu">
                     <li><a href="#home">ホーム</a></li>
                     <li><a href="#ranking">ランキング</a></li>
@@ -638,207 +669,201 @@
             <div class="user-actions">
                 <button class="btn btn-primary">ログイン</button>
                 <button class="btn btn-secondary">新規登録</button>
-            </div> -->
+            </div>
         </div>
     </header>
 
     <!-- メインコンテンツ -->
     <main>
         <div class="ranking-container">
-            <!-- 1位 -->
-            <div class="ranking-item first-place">
-                <div class="rank-number">
-                    <div class="crown gold"></div>
-                    <span class="rank-text">1位</span>
-                </div>
-                <div class="avatar-container">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
-                        alt="1位ユーザー" class="avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-details">
-                        <div class="username">
-                            <span class="verified">♡</span>みかん姫<span class="verified">♡</span>✨👑
+        <!-- 1位 -->
+        <div class="ranking-item first-place">
+            <div class="rank-number">
+                <div class="crown gold"></div>
+                <span class="rank-text">1位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face" alt="1位ユーザー" class="avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <div class="username">
+                        <span class="verified">♡</span>みかん姫<span class="verified">♡</span>✨👑
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>45,832</span>
                         </div>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-icon followers-icon"></div>
-                                <span>45,832</span>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon points-icon"></div>
-                                <span>25,678,920</span>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>25,678,920</span>
                         </div>
                     </div>
-                    <div class="sales-info">
-                        <div class="sales-label">合計売上</div>
-                        <div class="sales-amount">¥3,845,200</div>
-                    </div>
+                </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥3,845,200</div>
                 </div>
             </div>
+        </div>
 
-            <!-- 2位 -->
-            <div class="ranking-item second-place">
-                <div class="rank-number">
-                    <div class="crown silver"></div>
-                    <span class="rank-text">2位</span>
-                </div>
-                <div class="avatar-container">
-                    <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face"
-                        alt="ぺろチャラ" class="avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-details">
-                        <div class="username">
-                            <span class="verified">♡</span>ぺろチャラ<span class="verified">♡</span>🌊
+        <!-- 2位 -->
+        <div class="ranking-item second-place">
+            <div class="rank-number">
+                <div class="crown silver"></div>
+                <span class="rank-text">2位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face" alt="ぺろチャラ" class="avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <div class="username">
+                        <span class="verified">♡</span>ぺろチャラ<span class="verified">♡</span>🌊
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>22,346</span>
                         </div>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-icon followers-icon"></div>
-                                <span>22,346</span>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon points-icon"></div>
-                                <span>17,403,455</span>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>17,403,455</span>
                         </div>
                     </div>
-                    <div class="sales-info">
-                        <div class="sales-label">合計売上</div>
-                        <div class="sales-amount">¥2,610,500</div>
-                    </div>
+                </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥2,610,500</div>
                 </div>
             </div>
+        </div>
 
-            <!-- 3位 -->
-            <div class="ranking-item third-place">
-                <div class="rank-number">
-                    <div class="crown bronze"></div>
-                    <span class="rank-text">3位</span>
-                </div>
-                <div class="avatar-container">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-                        alt="黒もち" class="avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-details">
-                        <div class="username">
-                            黒もち❤️🌸
+        <!-- 3位 -->
+        <div class="ranking-item third-place">
+            <div class="rank-number">
+                <div class="crown bronze"></div>
+                <span class="rank-text">3位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="黒もち" class="avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <div class="username">
+                        黒もち❤️🌸
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>16,541</span>
                         </div>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-icon followers-icon"></div>
-                                <span>16,541</span>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon points-icon"></div>
-                                <span>16,400,425</span>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>16,400,425</span>
                         </div>
                     </div>
-                    <div class="sales-info">
-                        <div class="sales-label">合計売上</div>
-                        <div class="sales-amount">¥2,460,060</div>
-                    </div>
+                </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥2,460,060</div>
                 </div>
             </div>
+        </div>
 
-            <!-- 4位 -->
-            <div class="ranking-item">
-                <div class="rank-number">
-                    <span class="rank-text">4位</span>
-                </div>
-                <div class="avatar-container">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                        alt="天然ストレート" class="avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-details">
-                        <div class="username">
-                            天然ストレート＠たかしゼミ
+        <!-- 4位 -->
+        <div class="ranking-item">
+            <div class="rank-number">
+                <span class="rank-text">4位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="天然ストレート" class="avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <div class="username">
+                        天然ストレート＠たかしゼミ
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>227,080</span>
                         </div>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-icon followers-icon"></div>
-                                <span>227,080</span>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon points-icon"></div>
-                                <span>12,895,855</span>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>12,895,855</span>
                         </div>
                     </div>
-                    <div class="sales-info">
-                        <div class="sales-label">合計売上</div>
-                        <div class="sales-amount">¥1,934,380</div>
-                    </div>
+                </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥1,934,380</div>
                 </div>
             </div>
+        </div>
 
-            <!-- 5位 -->
-            <div class="ranking-item">
-                <div class="rank-number">
-                    <span class="rank-text">5位</span>
-                </div>
-                <div class="avatar-container">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
-                        alt="Saa♡chan" class="avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-details">
-                        <div class="username">
-                            Saa♡chan
+        <!-- 5位 -->
+        <div class="ranking-item">
+            <div class="rank-number">
+                <span class="rank-text">5位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Saa♡chan" class="avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <div class="username">
+                        Saa♡chan
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>66,472</span>
                         </div>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-icon followers-icon"></div>
-                                <span>66,472</span>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon points-icon"></div>
-                                <span>8,930,010</span>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>8,930,010</span>
                         </div>
                     </div>
-                    <div class="sales-info">
-                        <div class="sales-label">合計売上</div>
-                        <div class="sales-amount">¥1,339,500</div>
-                    </div>
+                </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥1,339,500</div>
                 </div>
             </div>
+        </div>
 
-            <!-- 6位 -->
-            <div class="ranking-item">
-                <div class="rank-number">
-                    <span class="rank-text">6位</span>
-                </div>
-                <div class="avatar-container">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-                        alt="ぱんだ院長" class="avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-details">
-                        <div class="username">
-                            ぱんだ院長@23日バトル🥇花屋
+        <!-- 6位 -->
+        <div class="ranking-item">
+            <div class="rank-number">
+                <span class="rank-text">6位</span>
+            </div>
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="ぱんだ院長" class="avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <div class="username">
+                        ぱんだ院長@23日バトル🥇花屋
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon followers-icon"></div>
+                            <span>26,021</span>
                         </div>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-icon followers-icon"></div>
-                                <span>26,021</span>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon points-icon"></div>
-                                <span>8,133,980</span>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-icon points-icon"></div>
+                            <span>8,133,980</span>
                         </div>
                     </div>
-                    <div class="sales-info">
-                        <div class="sales-label">合計売上</div>
-                        <div class="sales-amount">¥1,220,100</div>
-                    </div>
+                </div>
+                <div class="sales-info">
+                    <div class="sales-label">合計売上</div>
+                    <div class="sales-amount">¥1,220,100</div>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 
@@ -894,6 +919,227 @@
             </div>
         </div>
     </footer>
-</body>
 
+    <script>
+        // API設定（実際のAPIエンドポイントに変更してください）
+        const API_ENDPOINT = 'http://localhost:3000/api/shopify/products/summary';
+
+        // 数値をカンマ区切りでフォーマット
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+
+        // 金額をフォーマット
+        function formatCurrency(amount) {
+            return `¥${amount.toLocaleString()}`;
+        }
+
+        // ランキング位置に応じたクラスを取得
+        function getRankingClass(ranking) {
+            switch(ranking) {
+                case 1:
+                    return 'first-place';
+                case 2:
+                    return 'second-place';
+                case 3:
+                    return 'third-place';
+                default:
+                    return '';
+            }
+        }
+
+        // 王冠アイコンを生成
+        function getCrownHTML(ranking) {
+            switch(ranking) {
+                case 1:
+                    return '<div class="crown gold"></div>';
+                case 2:
+                    return '<div class="crown silver"></div>';
+                case 3:
+                    return '<div class="crown bronze"></div>';
+                default:
+                    return '';
+            }
+        }
+
+        // ランキングアイテムのHTMLを生成
+        function createRankingItemHTML(item) {
+            const rankingClass = getRankingClass(item.ranking);
+            const crownHTML = getCrownHTML(item.ranking);
+            
+            return `
+                <div class="ranking-item ${rankingClass}">
+                    <div class="rank-number">
+                        ${crownHTML}
+                        <span class="rank-text">${item.ranking}位</span>
+                    </div>
+                    <div class="avatar-container">
+                        <img src="${item.user_info.profile_image_url}" alt="${item.user_info.user_name}" class="avatar" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'">
+                    </div>
+                    <div class="user-info">
+                        <div class="user-details">
+                            <div class="username">
+                                ${item.user_info.user_name}
+                            </div>
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <div class="stat-icon points-icon"></div>
+                                    <span>${item.product_title}</span>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon followers-icon"></div>
+                                    <span>数量: ${formatNumber(item.total_quantity)}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sales-info">
+                            <div class="sales-label">合計売上</div>
+                            <div class="sales-amount">${formatCurrency(item.total_amount)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // エラーメッセージを表示
+        function showError(message) {
+            const container = document.getElementById('rankingContainer');
+            
+            // コンテナが見つからない場合のエラーハンドリング
+            if (!container) {
+                console.error('rankingContainer element not found');
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="error-message">
+                    <h3>データの取得に失敗しました</h3>
+                    <p>${message}</p>
+                    <button class="refresh-button" onclick="loadRankingData()">再読み込み</button>
+                </div>
+            `;
+        }
+
+        // ランキングデータをAPIから取得
+        async function loadRankingData() {
+            const container = document.getElementById('rankingContainer');
+            const loading = document.getElementById('loading');
+            
+            // コンテナが見つからない場合のエラーハンドリング
+            if (!container) {
+                console.error('rankingContainer element not found');
+                return;
+            }
+            
+            // ローディング表示
+            if (loading) {
+                loading.style.display = 'block';
+            }
+
+            try {
+                // デモ用のサンプルデータ（実際のAPIエンドポイントに変更してください）
+                const sampleData = [
+                    {
+                        "product_id": "8528788848794",
+                        "product_title": "チェキ1",
+                        "total_amount": 3845200,
+                        "total_quantity": 100,
+                        "user_info": {
+                            "user_id": "user_001",
+                            "user_name": "みかん姫",
+                            "profile_image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+                        },
+                        "ranking": 1
+                    },
+                    {
+                        "product_id": "8531163709594",
+                        "product_title": "チェキ2",
+                        "total_amount": 2610500,
+                        "total_quantity": 85,
+                        "user_info": {
+                            "user_id": "user_002",
+                            "user_name": "ぺろチャラ",
+                            "profile_image_url": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face"
+                        },
+                        "ranking": 2
+                    },
+                    {
+                        "product_id": "8531163709595",
+                        "product_title": "チェキ3",
+                        "total_amount": 2460060,
+                        "total_quantity": 75,
+                        "user_info": {
+                            "user_id": "user_003",
+                            "user_name": "黒もち",
+                            "profile_image_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+                        },
+                        "ranking": 3
+                    },
+                    {
+                        "product_id": "8531163709596",
+                        "product_title": "チェキ4",
+                        "total_amount": 1934380,
+                        "total_quantity": 60,
+                        "user_info": {
+                            "user_id": "user_004",
+                            "user_name": "天然ストレート",
+                            "profile_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                        },
+                        "ranking": 4
+                    }
+                ];
+
+                // 実際のAPI呼び出し（コメントアウト中）
+                const response = await fetch(API_ENDPOINT);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                // デモ用：サンプルデータを使用
+                // const data = sampleData;
+                
+                // ローディング非表示
+                if (loading) {
+                    loading.style.display = 'none';
+                }
+
+                // ランキングをrankingでソート
+                data.sort((a, b) => a.ranking - b.ranking);
+
+                // HTMLを生成
+                const rankingHTML = data.map(item => createRankingItemHTML(item)).join('');
+                container.innerHTML = rankingHTML;
+
+            } catch (error) {
+                console.error('Error fetching ranking data:', error);
+                showError(error.message);
+            }
+        }
+
+        // ページ読み込み時にデータを取得
+        window.addEventListener('load', function() {
+            // ページの完全読み込み後に実行
+            console.log('Page loaded, searching for rankingContainer...');
+            const container = document.getElementById('rankingContainer');
+            console.log('Container found:', container);
+            
+            if (container) {
+                loadRankingData();
+            } else {
+                console.error('rankingContainer still not found after page load');
+                // 代替として、クラス名で要素を取得
+                const containerByClass = document.querySelector('.ranking-container');
+                if (containerByClass) {
+                    containerByClass.id = 'rankingContainer';
+                    console.log('Added ID to container via class selector');
+                    loadRankingData();
+                }
+            }
+        });
+
+        // 定期的にデータを更新（オプション）
+        // setInterval(loadRankingData, 30000); // 30秒ごとに更新
+    </script>
+</body>
 </html>
