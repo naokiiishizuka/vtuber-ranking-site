@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -165,9 +166,17 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .first-place {
@@ -220,8 +229,13 @@
         }
 
         @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
         }
 
         .user-info {
@@ -596,8 +610,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .error-message {
@@ -651,24 +670,13 @@
         }
     </style>
 </head>
+
 <body>
     <!-- ヘッダー -->
     <header class="header">
         <div class="header-content">
             <div class="logo">
                 🎥 LiveRanking
-            </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="#home">ホーム</a></li>
-                    <li><a href="#ranking">ランキング</a></li>
-                    <li><a href="#events">イベント</a></li>
-                    <li><a href="#about">アバウト</a></li>
-                </ul>
-            </nav>
-            <div class="user-actions">
-                <button class="btn btn-primary">ログイン</button>
-                <button class="btn btn-secondary">新規登録</button>
             </div>
         </div>
     </header>
@@ -691,18 +699,8 @@
                 <div class="footer-section">
                     <h3>サービス</h3>
                     <ul>
-                        <li><a href="#live">ライブ配信</a></li>
                         <li><a href="#ranking">ランキング</a></li>
                         <li><a href="#events">イベント情報</a></li>
-                        <li><a href="#support">サポート</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>コミュニティ</h3>
-                    <ul>
-                        <li><a href="#blog">ブログ</a></li>
-                        <li><a href="#forum">フォーラム</a></li>
-                        <li><a href="#help">ヘルプセンター</a></li>
                         <li><a href="#contact">お問い合わせ</a></li>
                     </ul>
                 </div>
@@ -710,9 +708,6 @@
                     <h3>企業情報</h3>
                     <ul>
                         <li><a href="#about">会社概要</a></li>
-                        <li><a href="#careers">採用情報</a></li>
-                        <li><a href="#press">プレスリリース</a></li>
-                        <li><a href="#investors">投資家情報</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -720,18 +715,10 @@
                     <ul>
                         <li><a href="#terms">利用規約</a></li>
                         <li><a href="#privacy">プライバシーポリシー</a></li>
-                        <li><a href="#cookie">Cookie設定</a></li>
-                        <li><a href="#guidelines">コミュニティガイドライン</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="social-links">
-                    <a href="#twitter" class="social-link">T</a>
-                    <a href="#instagram" class="social-link">I</a>
-                    <a href="#youtube" class="social-link">Y</a>
-                    <a href="#tiktok" class="social-link">K</a>
-                </div>
                 <p>&copy; 2025 LiveRanking. All rights reserved.</p>
             </div>
         </div>
@@ -753,7 +740,7 @@
 
         // ランキング位置に応じたクラスを取得
         function getRankingClass(ranking) {
-            switch(ranking) {
+            switch (ranking) {
                 case 1:
                     return 'first-place';
                 case 2:
@@ -767,7 +754,7 @@
 
         // 王冠アイコンを生成
         function getCrownHTML(ranking) {
-            switch(ranking) {
+            switch (ranking) {
                 case 1:
                     return '<div class="crown gold"></div>';
                 case 2:
@@ -783,7 +770,7 @@
         function createRankingItemHTML(item) {
             const rankingClass = getRankingClass(item.ranking);
             const crownHTML = getCrownHTML(item.ranking);
-            
+
             return `
                 <div class="ranking-item ${rankingClass}">
                     <div class="rank-number">
@@ -819,19 +806,18 @@
         }
 
         // エラーメッセージを表示
-        function showError(message) {
+        function showError() {
             const container = document.getElementById('rankingContainer');
-            
+
             // コンテナが見つからない場合のエラーハンドリング
             if (!container) {
                 console.error('rankingContainer element not found');
                 return;
             }
-            
+
             container.innerHTML = `
                 <div class="error-message">
                     <h3>データの取得に失敗しました</h3>
-                    <p>${message}</p>
                     <button class="refresh-button" onclick="loadRankingData()">再読み込み</button>
                 </div>
             `;
@@ -841,71 +827,19 @@
         async function loadRankingData() {
             const container = document.getElementById('rankingContainer');
             const loading = document.getElementById('loading');
-            
+
             // コンテナが見つからない場合のエラーハンドリング
             if (!container) {
                 console.error('rankingContainer element not found');
                 return;
             }
-            
+
             // ローディング表示
             if (loading) {
                 loading.style.display = 'block';
             }
 
             try {
-                // デモ用のサンプルデータ（実際のAPIエンドポイントに変更してください）
-                const sampleData = [
-                    {
-                        "product_id": "8528788848794",
-                        "product_title": "チェキ1",
-                        "total_amount": 3845200,
-                        "total_quantity": 100,
-                        "user_info": {
-                            "user_id": "user_001",
-                            "user_name": "みかん姫",
-                            "profile_image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
-                        },
-                        "ranking": 1
-                    },
-                    {
-                        "product_id": "8531163709594",
-                        "product_title": "チェキ2",
-                        "total_amount": 2610500,
-                        "total_quantity": 85,
-                        "user_info": {
-                            "user_id": "user_002",
-                            "user_name": "ぺろチャラ",
-                            "profile_image_url": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face"
-                        },
-                        "ranking": 2
-                    },
-                    {
-                        "product_id": "8531163709595",
-                        "product_title": "チェキ3",
-                        "total_amount": 2460060,
-                        "total_quantity": 75,
-                        "user_info": {
-                            "user_id": "user_003",
-                            "user_name": "黒もち",
-                            "profile_image_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-                        },
-                        "ranking": 3
-                    },
-                    {
-                        "product_id": "8531163709596",
-                        "product_title": "チェキ4",
-                        "total_amount": 1934380,
-                        "total_quantity": 60,
-                        "user_info": {
-                            "user_id": "user_004",
-                            "user_name": "天然ストレート",
-                            "profile_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                        },
-                        "ranking": 4
-                    }
-                ];
-
                 // 実際のAPI呼び出し（コメントアウト中）
                 const response = await fetch(API_ENDPOINT);
                 if (!response.ok) {
@@ -913,9 +847,6 @@
                 }
                 const data = await response.json();
 
-                // デモ用：サンプルデータを使用
-                // const data = sampleData;
-                
                 // ローディング非表示
                 if (loading) {
                     loading.style.display = 'none';
@@ -930,12 +861,12 @@
 
             } catch (error) {
                 console.error('Error fetching ranking data:', error);
-                showError(error.message);
+                showError();
             }
         }
 
         // ページ読み込み時にデータを取得
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM loaded, starting data fetch...');
             loadRankingData();
         });
@@ -944,4 +875,5 @@
         // setInterval(loadRankingData, 30000); // 30秒ごとに更新
     </script>
 </body>
+
 </html>
