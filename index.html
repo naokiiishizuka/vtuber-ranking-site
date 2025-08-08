@@ -128,6 +128,11 @@
             color: #666;
         }
 
+        .no-rank {
+            font-size: 16px;
+            color: #999;
+        }
+
         .avatar-container {
             position: relative;
             margin-right: 20px;
@@ -297,6 +302,10 @@
             background: #ffd700;
         }
 
+        .coins-icon {
+            background: #ff9800;
+        }
+
         .sales-info {
             display: flex;
             flex-direction: column;
@@ -317,6 +326,11 @@
             font-size: 18px;
             font-weight: bold;
             color: #1b5e20;
+        }
+
+        .no-sales {
+            color: #999;
+            font-size: 14px;
         }
 
         /* モバイル用の順位スタイリング調整 */
@@ -731,8 +745,8 @@
 
     <script>
         // API設定（実際のAPIエンドポイントに変更してください）
-        const API_ENDPOINT = 'https://jcxz4nswah.ap-northeast-1.awsapprunner.com/api/shopify/products/summary';
-        // 'http://localhost:3000/api/shopify/products/summary';
+        const API_ENDPOINT = 'https://jcxz4nswah.ap-northeast-1.awsapprunner.com/api/rankings';
+        // 'http://localhost:3000/api/rankings';
 
         // 数値をカンマ区切りでフォーマット
         function formatNumber(num) {
@@ -746,6 +760,8 @@
 
         // ランキング位置に応じたクラスを取得
         function getRankingClass(ranking) {
+            if (!ranking) return '';
+
             switch (ranking) {
                 case 1:
                     return 'first-place';
@@ -760,6 +776,8 @@
 
         // 王冠アイコンを生成
         function getCrownHTML(ranking) {
+            if (!ranking) return '';
+
             switch (ranking) {
                 case 1:
                     return '<div class="crown gold"></div>';
@@ -772,16 +790,30 @@
             }
         }
 
+        // ランキングテキストを生成
+        function getRankText(ranking) {
+            if (!ranking) {
+                return '<span class="no-rank">ランク外</span>';
+            }
+            return `<span class="rank-text">${ranking}位</span>`;
+        }
+
         // ランキングアイテムのHTMLを生成
-        function createRankingItemHTML(item) {
+        function createRankingItemHTML(item, index) {
             const rankingClass = getRankingClass(item.ranking);
             const crownHTML = getCrownHTML(item.ranking);
+            const rankText = getRankText(item.ranking);
+
+            // 売上金額の表示
+            const salesDisplay = item.total_amount > 0
+                ? `<div class="sales-amount">${formatCurrency(item.total_amount)}</div>`
+                : `<div class="sales-amount no-sales">¥0</div>`;
 
             return `
                 <div class="ranking-item ${rankingClass}">
                     <div class="rank-number">
                         ${crownHTML}
-                        <span class="rank-text">${item.ranking}位</span>
+                        ${rankText}
                     </div>
                     <div class="avatar-container">
                         <img src="${item.user_info.profile_image_url}" alt="${item.user_info.user_name}" class="avatar" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'">
@@ -793,16 +825,18 @@
                             </div>
                             <div class="stats">
                                 <div class="stat-item">
-                                    <span>チケット: ${formatNumber(item.ticket)}</span>
+                                    <div class="stat-icon coins-icon"></div>
+                                    <span>コイン: ${formatNumber(item.throwing_coins)}</span>
                                 </div>
                                 <div class="stat-item">
-                                    <span>チェキ: ${formatNumber(item.instax)}</span>
+                                    <div class="stat-icon points-icon"></div>
+                                    <span>チケット: ${formatNumber(item.ticket)}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="sales-info">
                             <div class="sales-label">合計売上</div>
-                            <div class="sales-amount">${formatCurrency(item.total_amount)}</div>
+                            ${salesDisplay}
                         </div>
                     </div>
                 </div>
@@ -844,7 +878,7 @@
             }
 
             try {
-                // 実際のAPI呼び出し（コメントアウト中）
+                // 実際のAPI呼び出し
                 const response = await fetch(API_ENDPOINT);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -856,11 +890,20 @@
                     loading.style.display = 'none';
                 }
 
-                // ランキングをrankingでソート
-                data.sort((a, b) => a.ranking - b.ranking);
+                // ランキングでソート（nullの場合は最後に）
+                data.sort((a, b) => {
+                    // 両方がnullの場合は元の順序を維持
+                    if (a.ranking === null && b.ranking === null) return 0;
+                    // aがnullの場合は後に
+                    if (a.ranking === null) return 1;
+                    // bがnullの場合は前に
+                    if (b.ranking === null) return -1;
+                    // 両方に値がある場合は昇順
+                    return a.ranking - b.ranking;
+                });
 
                 // HTMLを生成
-                const rankingHTML = data.map(item => createRankingItemHTML(item)).join('');
+                const rankingHTML = data.map((item, index) => createRankingItemHTML(item, index)).join('');
                 container.innerHTML = rankingHTML;
 
             } catch (error) {
