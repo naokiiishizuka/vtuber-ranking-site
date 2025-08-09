@@ -745,8 +745,7 @@
 
     <script>
         // API設定（実際のAPIエンドポイントに変更してください）
-        const API_ENDPOINT = 'https://jcxz4nswah.ap-northeast-1.awsapprunner.com/api/rankings';
-        // 'http://localhost:3000/api/rankings';
+        const API_ENDPOINT = 'https://jcxz4nswah.ap-northeast-1.awsapprunner.com/api/rankings'; //'http://localhost:3000/api/rankings';
 
         // 数値をカンマ区切りでフォーマット
         function formatNumber(num) {
@@ -816,7 +815,7 @@
                         ${rankText}
                     </div>
                     <div class="avatar-container">
-                        <img src="${item.user_info.profile_image_url}" alt="${item.user_info.user_name}" class="avatar" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'">
+                        <img src="${item.user_info.profile_image_url}" alt="${item.user_info.user_name}" loading=”lazy” class="avatar" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'">
                     </div>
                     <div class="user-info">
                         <div class="user-details">
